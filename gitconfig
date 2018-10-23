@@ -1,0 +1,11 @@
+[user]
+  name = Stephen Potenza
+  email = 293866+potenza@users.noreply.github.com
+[core]
+  excludesfile = ~/.gitignore
+[alias]
+  co = checkout
+  l = log --pretty=oneline --graph --abbrev-commit
+[color]
+  ui = true
+  pager = true
