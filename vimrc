@@ -14,7 +14,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-rails'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'Asheq/close-buffers.vim'
+Plug 'mileszs/ack.vim'
+Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 
 " colors
@@ -29,6 +30,13 @@ let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1 " install powerline font glyphs
 let g:airline#extensions#tabline#enabled = 1 " display all buffers when a single tab is open
 let g:airline#extensions#tabline#formatter = 'unique_tail' " only display the filename in buffer
+
+" ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" don't open the first result automatically
+cnoreabbrev Ack Ack!
 
 " vim settings
 set expandtab                                             " expand tabs to spaces
@@ -66,18 +74,18 @@ noremap <leader>c :noh<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>g :GFile<CR>
 noremap <leader>f :Files<CR>
-noremap <leader>a :Ag<CR>
-noremap <leader>b :Buffers<CR>
-noremap <leader>cb :CloseOtherBuffers<CR>
-noremap <leader>t :Tags<CR>
-nnoremap <silent> <Leader>8 :call fzf#vim#ag(expand('<cword>'))<CR>
-command! -nargs=+ -complete=file Rag call fzf#vim#ag_raw(<q-args>)
+noremap <leader>\ :BufExplorer<CR>
+noremap <silent> <Leader>a :Ack! <cword><CR>
 
 " switch windows
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <C-h> <C-w>h
+
+" cycle through quickfix window
+nnoremap <Right> :cnext<CR>
+nnoremap <Left> :cprev<CR>
 
 " cycle through buffers
 nnoremap <Tab> :bnext<CR>
