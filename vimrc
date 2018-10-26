@@ -22,6 +22,9 @@ call plug#end()
 colorscheme onedark
 set termguicolors
 
+" set special key to bold red
+hi SpecialKey ctermfg=red guifg=red cterm=bold
+
 " fzf
 let g:fzf_tags_command = 'ctags -R'
 
