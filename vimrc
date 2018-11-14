@@ -16,6 +16,9 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'easymotion/vim-easymotion'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 " colors
@@ -25,8 +28,11 @@ set termguicolors
 " set special key to bold red
 hi SpecialKey ctermfg=red guifg=red cterm=bold
 
-" fzf
-let g:fzf_tags_command = 'ctags -R'
+" indentLine
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 'inc'
+let g:indentLine_conceallevel = 2
+let g:indentLine_char = '⎸'
 
 " airline
 let g:airline_theme='onedark'
@@ -57,6 +63,8 @@ set hlsearch                                              " highlight search wor
 set nocursorline                                          " turned off highlight cursor line (too slow)
 set title                                                 " set the terminal's title
 set encoding=utf-8                                        " needed for airline (powerline) fonts
+set splitright                                            " open vertical splits to the right
+set splitbelow                                            " open horizontal splits to the bottom
 
 " use /tmp for swap, backup, and undo files
 set directory=/tmp
