@@ -21,7 +21,6 @@ Plug 'justinmk/vim-sneak'
 Plug 'Asheq/close-buffers.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-Plug 'elzr/vim-json'
 call plug#end()
 
 " vim settings
