@@ -79,10 +79,12 @@ cnoreabbrev Ack Ack!
 
 " leader mappings
 let mapleader = " "
-noremap <leader>l :set number!<CR>
-noremap <leader>c :noh<CR>
+noremap <leader>ln :set number!<CR>
+noremap <leader>cm :Commits!<CR>
+noremap <leader>cl :noh<CR>
 noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>f :Files<CR>
+noremap <leader>g :GF!?<CR>
 noremap <leader>t :Tags<CR>
 noremap <leader>b :Buffers<CR>
 noremap <leader>a :Ack! <cword><CR>
