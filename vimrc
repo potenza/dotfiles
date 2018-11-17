@@ -8,6 +8,9 @@ endif
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
 Plug 'joshdick/onedark.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
@@ -15,8 +18,10 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'Yggdroot/indentLine'
 Plug 'Asheq/close-buffers.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json'
 call plug#end()
 
 " vim settings
@@ -55,12 +60,6 @@ hi SpecialKey ctermfg=red guifg=red cterm=bold
 let g:fzf_tags_command = 'ctags -R' " Command to generate tags file
 let $FZF_DEFAULT_COMMAND = 'ag -g ""' " ignore files specified by .gitignore: https://github.com/junegunn/fzf.vim/issues/121
 
-" indentLine
-let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 'inc'
-let g:indentLine_conceallevel = 2
-let g:indentLine_char = '⎸'
-
 " airline
 let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1 " install powerline font glyphs
@@ -68,6 +67,7 @@ let g:airline#extensions#tabline#enabled = 1 " display all buffers when a single
 let g:airline#extensions#tabline#formatter = 'unique_tail' " only display the filename in buffer
 
 " vim sneak
+let g:sneak#label = 1
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
