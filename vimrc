@@ -18,10 +18,11 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'Asheq/close-buffers.vim'
+Plug 'jlanzarotta/bufexplorer'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'bogado/file-line'
+Plug 'maksimr/vim-jsbeautify'
 call plug#end()
 
 " vim settings
@@ -78,19 +79,24 @@ endif
 " don't open the first result automatically
 cnoreabbrev Ack Ack!
 
+" BufExplorer
+let g:bufExplorerDisableDefaultKeyMapping=1 " disable default mappings
+
 " leader mappings
 let mapleader = " "
-noremap <leader>l :set number!<CR>
+"noremap <leader>a :Ack! <cword><CR>
+noremap <Leader>a :call fzf#vim#ag(expand('<cword>'))<CR>
+noremap <leader>b :BufExplorer<CR>
 noremap <leader>c :Commits!<CR>
-noremap <leader>h :noh<CR>
-noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>f :Files<CR>
 noremap <leader>g :GF!?<CR>
+noremap <leader>h :noh<CR>
+noremap <leader>l :set number!<CR>
+noremap <leader>n :NERDTreeToggle<CR>
 noremap <leader>t :Tags<CR>
-noremap <leader>b :Buffers<CR>
-noremap <leader>a :Ack! <cword><CR>
 noremap <leader>x :cclose<CR>
-noremap <leader>q :CloseHiddenBuffers<CR>
+noremap <leader><leader>a :Ag<CR>
+noremap <leader><leader>j :call JsBeautify()<CR>
 noremap <leader><leader>v :e ~/.vimrc<CR>
 
 " switch windows
