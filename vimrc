@@ -1,7 +1,17 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" auto-install vim-plug
+if has('nvim')
+  if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall
+  endif
+  call plug#begin('~/.config/nvim/plugged')
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
 endif
 
 " plugins
@@ -12,6 +22,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'joshdick/onedark.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'othree/yajs.vim'
+Plug 'othree/html5.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug '/usr/local/opt/fzf'
@@ -38,7 +51,8 @@ set nowrap                                                " don't wrap long line
 set ignorecase                                            " case-insensitive searching
 set smartcase                                             " case-sensitive if expression contains capital
 set hlsearch                                              " highlight search words
-set nocursorline                                          " turned off highlight cursor line (too slow)
+set nocursorline                                          " turn off highlight cursor line (too slow)
+set nocursorcolumn                                        " turn off highlight cursor column (too slow)
 set title                                                 " set the terminal's title
 set encoding=utf-8                                        " needed for airline (powerline) fonts
 set splitright                                            " open vertical splits to the right
@@ -51,8 +65,9 @@ set undofile
 set undodir=/tmp
 
 " colors
-colorscheme onedark
+syntax enable
 set termguicolors
+colorscheme OceanicNext
 
 " set special key to bold red
 hi SpecialKey ctermfg=red guifg=red cterm=bold
@@ -60,9 +75,10 @@ hi SpecialKey ctermfg=red guifg=red cterm=bold
 " fzf
 let g:fzf_tags_command = 'ctags -R' " Command to generate tags file
 let $FZF_DEFAULT_COMMAND = 'ag -g ""' " ignore files specified by .gitignore: https://github.com/junegunn/fzf.vim/issues/121
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) " exclude file names from search: https://github.com/junegunn/fzf.vim/issues/609
 
 " airline
-let g:airline_theme='onedark'
+let g:airline_theme='oceanicnext'
 let g:airline_powerline_fonts = 1 " install powerline font glyphs
 let g:airline#extensions#tabline#enabled = 1 " display all buffers when a single tab is open
 let g:airline#extensions#tabline#formatter = 'unique_tail' " only display the filename in buffer
@@ -97,7 +113,11 @@ noremap <leader>t :Tags<CR>
 noremap <leader>x :cclose<CR>
 noremap <leader><leader>a :Ag<CR>
 noremap <leader><leader>j :call JsBeautify()<CR>
-noremap <leader><leader>v :e ~/.vimrc<CR>
+if has('nvim')
+  noremap <leader><leader>v :e ~/.config/nvim/init.vim<CR>
+else
+  noremap <leader><leader>v :e ~/.vimrc<CR>
+endif
 
 " switch windows
 map <C-j> <C-w>j
