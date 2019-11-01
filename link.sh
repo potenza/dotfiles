@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p ~/.config/nvim
-ln -sf $PWD/bash_profile ~/.bash_profile
+ln -sf $PWD/zshrc ~/.zshrc
 ln -sf $PWD/gitconfig ~/.gitconfig
 ln -sf $PWD/gitignore ~/.gitignore
 ln -sf $PWD/tmux.conf ~/.tmux.conf
