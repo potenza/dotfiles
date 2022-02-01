@@ -3,10 +3,15 @@
   email = 293866+potenza@users.noreply.github.com
 [core]
   excludesfile = ~/.gitignore
+  pager = less -F -X
 [alias]
   co = checkout
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  bl = branch --list
+  bl = branch --list --sort=-committerdate
 [color]
   ui = true
   pager = true
+[pull]
+  rebase = false
+[init]
+  defaultBranch = main
