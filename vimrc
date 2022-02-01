@@ -102,7 +102,8 @@ let g:bufExplorerDisableDefaultKeyMapping=1 " disable default mappings
 let mapleader = " "
 "noremap <leader>a :Ack! <cword><CR>
 noremap <Leader>a :call fzf#vim#ag(expand('<cword>'))<CR>
-noremap <leader>b :BufExplorer<CR>
+noremap <leader>b :Buffers<CR>
+noremap <leader>e :BufExplorer<CR>
 noremap <leader>c :Commits!<CR>
 noremap <leader>f :Files<CR>
 noremap <leader>g :GF!?<CR>
