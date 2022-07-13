@@ -121,6 +121,7 @@ bindkey "^S" history-incremental-search-forward
 alias vim='nvim'
 alias pt='cd ~/projects/traction'
 alias pi='cd ~/projects/infrastructure'
+alias lc='cd ~/projects/leetcode'
 
 export AWS_PROFILE=streamline
 
