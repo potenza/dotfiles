@@ -23,20 +23,34 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
-Plug 'othree/yajs.vim'
-Plug 'othree/html5.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
 Plug 'bogado/file-line'
-Plug 'maksimr/vim-jsbeautify'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'folke/which-key.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
+
+lua << EOF
+  require'nvim-treesitter.configs'.setup {
+    -- A list of parser names, or "all"
+    ensure_installed = { "bash", "comment", "css", "dockerfile", "graphql", "html", "javascript", "jsdoc", "json", "json5", "markdown", "markdown_inline", "python", "regex", "ruby", "scss", "sql", "typescript", "yaml" },
+    auto_install = true, -- Automatically install missing parsers when entering buffer
+  }
+  require("nvim-tree").setup() -- empty setup using defaults
+
+  require("which-key").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  }
+EOF
 
 " vim settings
 set expandtab                                             " expand tabs to spaces
@@ -51,7 +65,7 @@ set nowrap                                                " don't wrap long line
 set ignorecase                                            " case-insensitive searching
 set smartcase                                             " case-sensitive if expression contains capital
 set hlsearch                                              " highlight search words
-set nocursorline                                          " turn off highlight cursor line (too slow)
+set cursorline                                            " turn off highlight cursor line (too slow)
 set nocursorcolumn                                        " turn off highlight cursor column (too slow)
 set title                                                 " set the terminal's title
 set encoding=utf-8                                        " needed for airline (powerline) fonts
@@ -67,7 +81,7 @@ set undodir=/tmp
 " colors
 syntax enable
 set termguicolors
-colorscheme OceanicNext
+colorscheme OneDark
 
 " set special key to bold red
 hi SpecialKey ctermfg=red guifg=red cterm=bold
@@ -78,15 +92,15 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""' " ignore files specified by .gitignore: ht
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) " exclude file names from search: https://github.com/junegunn/fzf.vim/issues/609
 
 " airline
-let g:airline_theme='oceanicnext'
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1 " install powerline font glyphs
 let g:airline#extensions#tabline#enabled = 1 " display all buffers when a single tab is open
 let g:airline#extensions#tabline#formatter = 'unique_tail' " only display the filename in buffer
 
 " vim sneak
 let g:sneak#label = 1
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+noremap f <Plug>Sneak_s
+noremap F <Plug>Sneak_S
 
 " ack
 if executable('ag')
@@ -109,7 +123,7 @@ noremap <leader>f :Files<CR>
 noremap <leader>g :GF!?<CR>
 noremap <leader>h :noh<CR>
 noremap <leader>l :set number!<CR>
-noremap <leader>n :NERDTreeToggle<CR>
+noremap <leader>n :NvimTreeToggle<CR>
 noremap <leader>t :Tags<CR>
 noremap <leader>x :cclose<CR>
 noremap <leader><leader>a :Ag<CR>

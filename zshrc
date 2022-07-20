@@ -73,6 +73,7 @@ plugins=(
   git
   chruby
   nvm
+  brew
 )
 
 source $ZSH/oh-my-zsh.sh
