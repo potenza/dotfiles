@@ -123,11 +123,17 @@ alias vim='nvim'
 alias pt='cd ~/projects/traction'
 alias pi='cd ~/projects/infrastructure'
 alias lc='cd ~/projects/leetcode'
+alias e2e='RAILS_ENV=acceptance bundle exec rake protractor:spec'
+alias e2eskip='SKIP_WEBPACKER=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
 
 export AWS_PROFILE=streamline
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#export PATH="/opt/homebrew/bin:$PATH"
 
-alias python=/usr/local/bin/python3
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
