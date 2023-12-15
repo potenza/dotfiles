@@ -123,8 +123,8 @@ alias vim='nvim'
 alias pt='cd ~/projects/traction'
 alias pi='cd ~/projects/infrastructure'
 alias lc='cd ~/projects/leetcode'
-alias e2e='RAILS_ENV=acceptance bundle exec rake protractor:spec'
-alias e2eskip='SKIP_WEBPACKER=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
+alias e2e='SKIP_RETRY=true VISUAL=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
+alias e2eskip='SKIP_RETRY=true VISUAL=true SKIP_WEBPACKER=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
 
 export AWS_PROFILE=streamline
 
