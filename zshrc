@@ -72,10 +72,13 @@ plugins=(
   web-search
   git
   chruby
-  nvm
   brew
+  nvm
+  direnv
 )
 
+NVM_AUTOLOAD=1
+zstyle ':omz:plugins:nvm' autoload true
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -119,21 +122,27 @@ bindkey -v
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
-alias vim='nvim'
+alias vim='nvm use stable >/dev/null 2>&1; nvim'
 alias pt='cd ~/projects/traction'
 alias pi='cd ~/projects/infrastructure'
+alias pz='cd ~/projects/zephyr'
 alias lc='cd ~/projects/leetcode'
+alias ts='~/scripts/tmux-setup.sh'
+
+alias ai='nvm use stable >/dev/null 2>&1; ~/.local/bin/claude'
+
+# node 18
+# alias e2e='NODE_OPTIONS=--openssl-legacy-provider SKIP_RETRY=true VISUAL=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
+# alias e2eskip='NODE_OPTIONS=--openssl-legacy-provider SKIP_RETRY=true VISUAL=true SKIP_WEBPACKER=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
 alias e2e='SKIP_RETRY=true VISUAL=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
 alias e2eskip='SKIP_RETRY=true VISUAL=true SKIP_WEBPACKER=true RAILS_ENV=acceptance bundle exec rake protractor:spec'
 
-export AWS_PROFILE=streamline
+alias wip='git commit -m "WIP" --no-verify'
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-#[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-#export PATH="/opt/homebrew/bin:$PATH"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
+# https://github.com/johnnyopao/awsp
+# export AWS_PROFILE=streamline
+alias awsp="source _awsp"
+export PATH="$HOME/.local/bin:$PATH"
